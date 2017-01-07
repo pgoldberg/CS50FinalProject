@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+
+        <!-- http://jquery.com/ -->
+        <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+        
+        <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/sandstone/bootstrap.min.css" rel="stylesheet"/>
+        
+        <!-- http://getbootstrap.com/ -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        
+        <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet"/>
+        
+        <!-- http://stewartjpark.com/Flask-JSGlue/ -->
+        {{ JSGlue.include() }}
+        
+        <title>{% block title %}{% endblock %}</title>
+        
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        
+        <!-- app's own JavaScript -->
+        <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+        {% block script %}{% endblock %}
+
+    </head>
+
+    <body>
+        <div class="container">
+
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button aria-expanded="false" class="navbar-toggle collapsed" data-target="#navbar" data-toggle="collapse" type="button">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="{{ url_for('index') }}">
+                            <span>Markr</span>
+                        </a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="navbar">
+                        {% if session.user_id %}
+                            <ul class="nav navbar-nav">
+                                <li><a href="{{ url_for('index') }}">Map</a></li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="dropdown">
+                                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
+                                  <ul class="dropdown-menu dropdown-menu-left">
+                                      <li><a href="{{ url_for('profile') }}">Profile</a></li>
+                                    <li><a href="{{ url_for('password') }}">Change Password</a></li>
+                                  </ul>
+                                </li>
+                                <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+                            </ul>
+                        {% else %}
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="{{ url_for('register') }}">Register</a></li>
+                                <li><a href="{{ url_for('logout') }}">Log In</a></li>
+                            </ul>
+                        {% endif %}
+                    </div>
+                </div>
+            </nav>
+
+            {% block flash %}{% endblock %}
+
+            <main>
+                {% block main %}{% endblock %}
+            </main>
+        </div>
+        <div class="footer">
+            <p align="center">Created by:<br>Peter Goldberg (Harvard 2020, Weld, CS)<br>Larry Gu (Harvard 2020, Wigglesworth, Undeclared)<br>Will Long (Harvard 2020, Weld, Economics)</p>
+        </div>
+    </body>
+</html>

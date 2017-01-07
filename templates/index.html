@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+    
+<!-- http://stewartjpark.com/Flask-JSGlue/ -->
+{{ JSGlue.include() }}
+    
+{% block title %}
+  Geolocation
+{% endblock %}
+
+{% block script %}
+  <script src="{{ url_for('static', filename='index.js') }}"></script>
+{% endblock %}
+
+{% block main %}
+  <!-- Map -->
+  <div id="map"></div>
+  <script async defer
+  src="https://maps.googleapis.com/maps/api/js?key={{ key | urlencode }}&callback=initMap">
+  </script>
+  
+  <!-- Search -->
+  <div id="sidebar" class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 align="center">Search</h3>
+    </div>
+    <div class="panel-content">
+      <div class="dropdown" align="center">
+        <button id="search-type" class="btn btn-primary btn-sm dropdown-toggle" type="button" data-toggle="dropdown">Search For An Object
+        <span class="caret"></span></button>
+        <ul id="dropdown" class="dropdown-menu">
+          <li><a href="#" id="bathroom">Bathroom</a></li>
+          <li><a href="#" id="fountain">Water Fountain</a></li>
+          <li><a href="#" id="bluelight">Bluelight</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Submit new marker form -->
+  <div id="sidebar" class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 align="center">Submit New Marker</h3>
+    </div>
+    <div class="panel-content">
+      {% if get_flashed_messages() %}
+        <header>
+            <div class="alert alert-{{ alert }}" role="alert" align="center">
+                {{ get_flashed_messages() | join(" ") }}
+            </div>
+        </header>
+      {% endif %}
+      <form action="{{ url_for('index') }}" method="post">
+        <div class="dropdown" align="center">
+          <button id="marker-type" class="btn btn-primary btn-sm dropdown-toggle" type="button" data-toggle="dropdown">Marker Type
+          <span class="caret"></span></button>
+          <ul id="dropdown" class="dropdown-menu">
+            <li><a href="#" id="submit-bathroom">Bathroom</a></li>
+            <li><a href="#" id="submit-fountain">Water Fountain</a></li>
+            <li><a href="#" id="submit-bluelight">Bluelight</a></li>
+          </ul>
+        </div>
+        <div class="form-group">
+          <input id="submit-type" name="type" type="hidden" value=""/>
+        </div>
+        <div class="form-group" align="center">
+          Description<br/>
+          <input class="form-control" name="desc" placeholder="Short Description" type="text"/>
+        </div>
+        <div class="form-group">
+          <input id="poslat" name="lat" type="hidden"/>
+        </div>
+        <div class="form-group">
+          <input id="poslng" name="lng" type="hidden"/>
+        </div>
+        <div class="form-group" align="center">
+          <button class="btn btn-primary" type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

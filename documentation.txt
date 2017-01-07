@@ -1,0 +1,59 @@
+INTRO: The goal of our project 'Markr' is to crowd source the location of objects and locations that are
+typically not kept track of by other more traditional map apps. Markr shows objects of interests near you
+by pointing them out with markers, and allows you to vote on markers as good or bad depending on their quality
+and accuracy. Markr also allows you to submit the locations of new objects by selecting an object type,
+typing in a brief description, and clicking submit when you are standing close to an object of the kind you picked.
+The object's location is automatically stored based on your current coordinates.
+
+
+GETTING IT TO WORK: You will need to move the files into a folder of the CS50 IDE. In the folder that you have chosen to 
+store our files, you need to run the terminal commands 'phpliteadmin project.db' and 'run flask' in seperate terminals
+in order to start the server and the website. From there, click onCS50 IDE in the top-left hand corner and click 
+'Web server'. That should take you to our account login page.
+
+
+REGISTERING: The first thing that needs to be done in order to use our website is to register a account. To do
+this you will need to first click the link to 'register' in the top right corner located on the page banner. 
+In order to register, provide us with a username and a password that you type in twice to confirm.
+
+
+LOGGING IN: After registering an account, you will be redirected to the login page, where you will need to provide
+your username and password again. Clicking login will then take you to the Markr map centered around your current
+location. You are represented by a red circle that provides a range of where you could currently be.
+
+
+SEARCHING OBJECTS: Searching objects is quite simple at the moment. In order to search for an object, move your cursor to 
+the top left corner of your screen underneath the 'Search' title subdivision. Click on the drop down menu 
+that says 'select a category' and click on the object type that you want to find. Currently you can only
+search for bathrooms, bluelights and waterfountains, but in the future you will be able to search for even more.
+Clicking on the object type of your choice will cause markers to pop up on the coordinates of all submitted 
+objects of that type near you.
+
+
+Clicking on each marker will cause an info-window to pop up containing the object's type, a brief description 
+of that object submitted by the user who gave us its location, an 'upvote' and 'downvote' button, as well as a 
+score for that object based on its total number of 'upvotes' and 'downvotes'.
+
+
+VOTING ON MARKERS: Voting for objects is important. It gives the users and admins an idea of which objects are legitimate
+and which objects are not... which objects are high quality/should be used and which objects should be avoided.
+If you wish to vote an object, simply click 'Upvote' or 'Downvote' after clicking on that objects marker. The 
+object's score will be automatically updated in real time. If you wish to revert your vote, click once on the
+voting button for the opposite vote-type. Reverting your vote makes it so you never actually impact that objects
+score. You must vote again after reverting in order to change that objects total score.
+
+
+SUBMITING NEW LOCATIONS: In order to submit the location of a new object, make sure that your computer is near that object.
+Move your cursor to the 'Submit' title subdivision, and select the object's type from the dropdown menu 
+'Marker type'. Type in a short description in the textbox labeled 'Short description' and click submit.
+After you click submit, the marker for the object you just submited should automatically appear on your screen
+after you refresh the page. The location of the marker on your map should be your current location.
+
+VIEWING YOUR PROFILE: You can view your profile, including your username, points, and submissions, by pressing the 'Account'
+dropdown button in the top right corner of the navbar, then selecting 'Profile'.
+
+REMOVING A MARKER: You can remove a marker you submitted from your profile page by clicking the "Remove" button next to the 
+marker you would like to remove.
+
+CHANGING YOUR PASSWORD: You can change your password by pressing the 'Account' dropdown button in the top right corner of 
+the navbar, then selecting 'Change Password'.

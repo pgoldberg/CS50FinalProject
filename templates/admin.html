@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Admin
+{% endblock %}
+
+{% block main %}
+
+
+<table style="width:100%">
+  <tr>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Latitude</th>
+    <th>Longitude</th>
+
+  </tr>
+    
+    {% for i in objectList %}
+      <tr>
+        
+        <td>{{ i.type }}</td>
+        <td>{{ i.desc }}</td>
+        <td>{{ i.oLat }}</td>
+        <td>{{ i.oLng}}</td>
+        
+        
+      </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

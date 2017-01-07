@@ -1,0 +1,90 @@
+/* Always set the map height explicitly to define the size of the div
+* element that contains the map. */
+#map
+{
+    height: 500px;
+    width: 65%;
+    float: right;
+}
+
+/* Optional: Makes the sample page fill the window. */
+html, body
+{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+H5
+{
+    display: inline;
+}
+
+/* source: http://stackoverflow.com/a/28078054 */
+#dropdown
+{
+  left: 50%;
+  right: auto;
+  text-align: center;
+  transform: translate(-50%, 0);
+}
+
+.btn
+{
+    white-space: normal;
+}
+
+#sidebar
+{
+    width: 30%;
+}
+
+#search-type, #marker-type
+{
+    width: 50%;
+}
+
+.panel-content
+{
+    padding-top: 25.25px;
+    padding-bottom: 25.25px;
+}
+
+.form-control
+{
+    width: 70%;
+}
+
+#table
+{
+    width: 65%;
+    float: right;
+}
+
+.table
+{
+    margin: 0;
+}
+
+#desc
+{
+    width: 65%;
+}
+
+#field
+{
+    width: 30%;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+.footer
+{
+    width: 100%;
+}
+
+.navbar
+{
+    background-color: #4F4F4F;
+}

@@ -1,0 +1,157 @@
+A. application.py
+
+application.py contains all our main python functions, which are the routes that allows our program to perform its 
+main purposes, such as searching, submitting, and voting on markers, as well as basic user functions such as registration
+and login/logout. 
+
+    i. index()
+    
+    index() is our main function for the home page, designed to render the map, if it is a GET method, or to submit a new 
+    marker, if it is a POST method. In the case of a GET method, index() simply renders the index.html page, so that 
+    the user sees the navbar on top, the user's search and submit options on the side, and the map in the middle. When the
+    user decides to sumbit a location, index() will check to make sure that the user has specified and described
+    the marker they are submitting, and that their coordinates are received. If not, index() will inform the user of 
+    what is missing via apology(). Otherwise, index() will insert the new marker into the project.db database, and then
+    redirect the user to index.html again.
+    
+    ii. login()
+    
+    login() allows the user to login. It checks that the user has typed in their username and password. Afterwards, it 
+    checks our "users" table in project.db to make sure the username and password match. If everything is correct, login() 
+    will remember the user's id during his or her session and redirect the user to the home page.
+    
+    iii. logout()
+    
+    logout() clears the session of the user's id, and then redirects the user to the login page.
+    
+    iv. profile()
+    
+    profile() takes the user to their profile, which includes their username, points, and submitted markers.
+    
+    v. register()
+    
+    register() is our function that register's a new user so that they can user Markr. The user is required to choose a 
+    unique username and enter a password twice to confirm it. If successful, the new user will be added to our "users"
+    table in project.db and then redirected to the login page. Otherwise, they will have to register again with valid 
+    information.
+    
+    vi. search()
+    
+    search() is the function that is called when the user selects a type of marker to display from the search dropdown 
+    menu on the home page. It gets the bounds on the map and selects all markers of the desired type within view from
+    "markers1" in project.db. Then search() returns a json array of selected markers to scripts.js to be displayed on the 
+    map.
+    
+    vii. vote()
+    
+    vote() allows users to upvote or downvote markers that have already been submitted and appear on the map. vote()
+    first stores the user's id, the marker's id, and the type of vote cast by the user. It will search the "votes" 
+    table in project.db to make sure that the user has not already voted one way for the marker in question. If the 
+    user has not yet voted, vote() will update the "votes" table to remember how the user voted and the "markers1" 
+    table to change the marker's score. If the user has already voted and wants to change his or her vote, vote() 
+    will also let the user modify their vote. It will not let the user vote the same way for the same marker multiple
+    times. For the user who submitted the marker, if their marker is upvoted, they also get a point. If their marker 
+    is downvoted, however, they lose a point.
+
+B. helpers.py
+
+helpers.py is a python file containing helper functions for our main functions in application.py. None of the 
+functions in helpers.py are designed for any specific function in application.py; rather the helper functions can be
+used by any of the main functions as needed. The two helper functions that we have in helpers.py are apology() and
+login_required(f), which are designed, respectively, to prompt the user that they made a mistake and to make sure 
+that the user is only accessing pages which they are authorized to access.
+    
+    i. login_required(f)
+    
+    login_required(f) makes sure that the functions that are login required only have logged-in users accessing 
+    them. It checks the session to make sure that a user has logged in. If no user has logged in, 
+    login_required(f) will redirect users to the login page.
+
+C. HTML files
+
+The HTML files are the actual pages that users will see while using Markr.
+    
+    i. index.html
+    
+    index.html is our home page. It extends layout.html's navbar on top. On the left, the user is given the options
+    to search and submit markers. Both the search and submit fieldsets have dropdown menus to specify the type of marker
+    to search for or submit. The submit fieldset also has a form that gives a description for the marker. On the right
+    we have our actual map, taken from the Google Maps API.
+    
+    ii. layout.html
+    
+    layout.html is the template for all of the html files in our project. It has the navbar containing our program's name 
+    and some redirect links. If the user is logged in, the navbar also has the logout button. Otherwise, the navbar allows 
+    the user to register or log in.
+    
+    iii. login.html
+    
+    login.html is an html form that lets the user type in his or her username and password to login.
+    
+    iv. profile.html
+    
+    profile.html lists the user's username, points, and a table of their submitted markers.
+    
+    v. register.html
+    
+    register.html allows the user to enter a username, password, and password confirmation to create a new account.
+
+D. scripts.js
+
+The scripts.js file contains all our javascript functions that are run in index.html.
+
+    i. newLine(text)
+    
+    newLine(text) breaks a line into multiple lines if its length exceeds 200 characters.
+    
+    ii. initMap()
+    
+    initMap() initializes the map used by our program. It stores the latitude and longitude of the user for later use. It
+    also creates a red circle at the user's location to indicate the range of error possible when using our program.
+    
+    iii. capitalizeFirstLetter(string)
+    
+    capitalizeFirstLetter(string) capitalizes the first letter of string.
+    
+    iv. vote()
+    
+    vote() passes the marker id and type of vote to application.py so that "markers1" and "votes" in project.db can be 
+    updated. It then displays the number of upvotes a marker has.
+    
+    v. addMarker()
+    
+    addMarker() adds markers where users have submitted them. It adds a listener and infowindow for each marker 
+    containing the marker type, marker description, and upvote and downvote buttons.
+    
+    vi. configure()
+    
+    configure() configures the map and updates the map each time the user manipulates it, either by dragging or zooming 
+    in or out.
+    
+    vii. removeMarkers()
+    
+    removeMarkers() removes markers.
+    
+    viii. search(type)
+    
+    search() passes the map bounds to application.py so that it can find the markers within view. Then it adds markers
+    on the map for the markers that are returned from application.py.
+
+E. project.db
+
+Our database has 3 tables to store the user accounts, the markers, and the votes that users have submitted for the markers.
+
+    i. "users"
+    
+    "users" records all the usernames, passwords, admin privileges, ids, and points for each individual account.
+    
+    ii. "markers1"
+    
+    "markers1" is a table for the individual markers that users have submitted. It stores the type, description, latitudes,
+    longitudes, upvotes, and submitter for each marker. Each marker is also assigned an id.
+    
+    iii. "votes"
+    
+    "votes" remembers each vote that was cast for every marker. It stores the id of the user who voted, the id of the marker 
+    that was voted on, and the type of vote.
+

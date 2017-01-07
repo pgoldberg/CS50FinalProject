@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Log In
+{% endblock %}
+
+{% block flash %}
+    {% if get_flashed_messages() %}
+        <header>
+            <div class="alert alert-danger" role="alert" align="center">
+                {{ get_flashed_messages() | join(" ") }}
+            </div>
+        </header>
+    {% endif %}
+{% endblock %}
+
+{% block main %}
+    <form action="{{ url_for('login') }}" method="post">
+        <fieldset>
+            <div id="field" class="form-group" align="center">
+                <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text"/>
+            </div>
+            <div id="field" class="form-group" align="center">
+                <input class="form-control" name="password" placeholder="Password" type="password"/>
+            </div>
+            <div class="form-group" align="center">
+                <button class="btn btn-default" type="submit">Log In</button>
+            </div>
+        </fieldset>
+    </form>
+{% endblock %}

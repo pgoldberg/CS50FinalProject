@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Profile
+{% endblock %}
+
+{% block flash %}
+    {% if get_flashed_messages() %}
+        <header>
+            <div class="alert alert-{{ alert }}" role="alert" align="center">
+                {{ get_flashed_messages() | join(" ") }}
+            </div>
+        </header>
+    {% endif %}
+{% endblock %}
+
+{% block main %}
+    <div id="table" class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 align="center">Your Markers</h3>
+        </div>
+        <div align="center">
+            <table class="table table-striped">
+                <tr>
+                    <th><font size="3">Type</font></th>
+                    <th><font size="3">Description</font></th>
+                    <th><font size="3">Votes</font></th>
+                    {% if markers|length > 0 %}
+                        <th><font size="3">Remove</font></th>
+                    {% endif %}
+                </tr>
+                {% for key in markers %}
+                    <tr>
+                        {% if key["type"] == "bathroom" %}
+                            <td>Bathroom</td>
+                        {% elif key["type"] == "fountain" %}
+                            <td>Water Fountain</td>
+                        {% elif key["type"] == "bluelight" %}
+                            <td>Blue Light</td>
+                        {% endif %}
+                        <td id="desc">{{ key["descr"] }}</td>
+                        <td>{{ key["checks"] }}</td>
+                        <td>
+                            <form action="{{ url_for('remove') }}" method="post">
+                                <div class="form-group">
+                                    <input type="hidden" name="marker_id" value="{{ key.id }}">
+                                    <button class="btn btn-default btn-sm" type="submit">Remove</button>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td></td>
+                    <td align="right"><b>Total</b></td>
+                    <td><b>{{ user[0]["points"] }}</b></td>
+                    {% if markers|length > 0 %}
+                        <td></td>
+                    {% endif %}
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="sidebar" class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 align="center">Profile</h3>
+        </div>
+        <div class="panel-content">
+            <p align="center"><b>Username</b></p>
+            <p align="center">{{ user[0]["username"] }}</p>
+            <br/>
+            <p align="center"><b>Points</b></p>
+            <p align="center">{{ user[0]["points"] }}</p>
+        </div>
+    </div>
+{% endblock %}
