@@ -341,7 +341,13 @@ def remove():
     """Remove Marker"""
     # get marker id
     marker_id = request.form.get("marker_id")
-    
+
+    # ensure marker exists
+    rows = db.execute("SELECT * FROM markers1 WHERE id=:id AND uid=:uid", id=marker_id, uid=session["user_id"])
+    if len(rows) == 0:
+        flash("Unable to remove marker")
+        return redirect(url_for("profile", alert="danger"))
+
     # remove marker
     db.execute("DELETE FROM markers1 WHERE id=:id AND uid=:uid", id=marker_id, uid=session["user_id"])
 
