@@ -66,17 +66,17 @@ def index():
         # ensure location is obtained
         if lat == '' or lng == '':
             flash("Could not find your location")
-            return render_template("index.html", key=os.environ.get("API_KEY"), alert="danger")
+            return render_template("index.html", key=os.environ.get("API_KEY"), alert="danger", flash="submit")
         
         # ensure marker has a type
         if request.form.get("type") == '':
             flash("Must select an object type")
-            return render_template("index.html", key=os.environ.get("API_KEY"), alert="danger")
+            return render_template("index.html", key=os.environ.get("API_KEY"), alert="danger", flash="submit")
         
         # ensure marker has a description
         if request.form.get("desc") == '':
             flash("Must include description")
-            return render_template("index.html", key=os.environ.get("API_KEY"), alert="danger")
+            return render_template("index.html", key=os.environ.get("API_KEY"), alert="danger", flash="submit")
         
         # create marker at user location with user's description
         else:
@@ -85,7 +85,7 @@ def index():
         
         # redirect user to home page
         flash("Successfully submitted marker!")
-        return render_template("index.html", key=os.environ.get("API_KEY"), alert="info")
+        return render_template("index.html", key=os.environ.get("API_KEY"), alert="info", flash="submit")
 
     # else if user reached route via GET (as by clicking a link or via redirect)
     else:
@@ -353,6 +353,18 @@ def remove():
         # flash error on fail
         flash("Could not remove marker")
         return redirect(url_for("profile", alert="danger"))
+
+@app.route("/user", methods=["GET"])
+@login_required
+def user():
+	uid = request.args.get('uid')
+	user = db.execute("SELECT * FROM users WHERE id=:uid", uid=uid)
+	markers = db.execute("SELECT * FROM markers1 WHERE uid=:uid", uid=uid)
+	if len(user) == 0:
+		flash("Could not find user")
+		return render_template("index.html", flash="head", alert="danger")
+	else:
+		return render_template("user.html", user=user, markers=markers)
 
 if __name__ == "__main__":
     app.debug = False

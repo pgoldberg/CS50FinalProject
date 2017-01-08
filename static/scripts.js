@@ -153,8 +153,8 @@ function addMarker(place)
     // infowindow for marker type, description, and votes
     marker.addListener('click', function() {
         var contentString = "<h3>" + capitalizeFirstLetter(place.type) + "</h3>" + "<div id='info'><h5>Description: </h5>" +
-        newLine(place.descr) + "</div>" + '<br/>' + "<input id='" + id + "' type='button' class='btn btn-default' onclick='vote(" +
-        id + ", \"upvote\")' value='Upvote  " + place.checks + "'/>" +" <input type='button' class='btn btn-default' onclick='vote(" +
+        newLine(place.descr) + "</div>" + "<a href='/user?uid=" + place.uid +"'>View User</a><br/><br/>" + "<input id='" + id + "' type='button' class='btn btn-default' onclick='vote(" +
+        id + ", \"upvote\")' value='Upvote  " + place.checks + "'/>" + " <input type='button' class='btn btn-default' onclick='vote(" +
         id + ", \"downvote\")' value='Downvote'/>";
         
         info.setContent(contentString);

@@ -4,7 +4,7 @@
 {{ JSGlue.include() }}
     
 {% block title %}
-  Geolocation
+  Markr
 {% endblock %}
 
 {% block script %}
@@ -12,6 +12,13 @@
 {% endblock %}
 
 {% block main %}
+  {% if get_flashed_messages() and flash == "head" %}
+    <header>
+        <div class="alert alert-{{ alert }}" role="alert" align="center">
+            {{ get_flashed_messages() | join(" ") }}
+        </div>
+    </header>
+  {% endif %}
   <!-- Map -->
   <div id="map"></div>
   <script async defer
@@ -42,7 +49,7 @@
       <h3 align="center">Submit New Marker</h3>
     </div>
     <div class="panel-content">
-      {% if get_flashed_messages() %}
+      {% if get_flashed_messages() and flash == "submit" %}
         <header>
             <div class="alert alert-{{ alert }}" role="alert" align="center">
                 {{ get_flashed_messages() | join(" ") }}
