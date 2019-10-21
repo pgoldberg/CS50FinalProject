@@ -18,7 +18,7 @@ ipaddress==1.0.17
 itsdangerous==0.24
 Jinja2==2.8
 MarkupSafe==0.23
-nltk==3.2.1
+nltk==3.4.5
 oauthlib==2.0.0
 passlib==1.6.5
 plotly==1.12.9
