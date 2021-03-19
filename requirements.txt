@@ -16,7 +16,7 @@ html5lib==0.999
 idna==2.2
 ipaddress==1.0.17
 itsdangerous==0.24
-Jinja2==2.8
+Jinja2==2.11.3
 MarkupSafe==0.23
 nltk==3.2.1
 oauthlib==2.0.0
