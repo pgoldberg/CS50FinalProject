@@ -12,7 +12,7 @@ Flask-JSGlue==0.3.1
 Flask-Session==0.3.0
 Flask-SQLAlchemy==2.1
 Flask-SSLify==0.1.5
-html5lib==0.999
+html5lib==0.999999999
 idna==2.2
 ipaddress==1.0.17
 itsdangerous==0.24
