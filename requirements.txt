@@ -29,7 +29,7 @@ pycurl==7.19.3
 pyOpenSSL==16.2.0
 python-openid==2.2.5
 pytz==2016.7
-requests==2.2.1
+requests==2.20.0
 requests-oauthlib==0.7.0
 simplejson==3.10.0
 six==1.5.2
